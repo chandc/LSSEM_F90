@@ -1,0 +1,87 @@
+# Makefile for SEM_base_2D Fortran program
+# Spectral Element Method (SEM) 2D solver
+
+# Compiler and flags
+FC = gfortran
+FFLAGS = -O2 -g -Wall -Wextra -fcheck=bounds -fbacktrace -fdefault-real-8 -fdefault-double-8
+LDFLAGS = 
+
+# Alternative compiler options (uncomment as needed)
+# For Intel Fortran Compiler:
+# FC = ifort
+# FFLAGS = -O2 -g -warn all -check bounds -traceback -r8 -i8
+
+# For double precision with gfortran:
+# -fdefault-real-8: promotes default real to double precision
+# -fdefault-double-8: promotes default double to quad precision
+
+# For debugging (uncomment for debug build):
+# FFLAGS = -O0 -g -Wall -Wextra -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow -fdefault-real-8 -fdefault-double-8
+
+# Source files
+SRCFILE = SEM_base_2D.f
+OBJFILE = SEM_base_2D.o
+EXECUTABLE = SEM_base_2D
+
+# Input file
+INPUT_FILE = input_36_7_Re1000.nml
+
+# Default target
+all: $(EXECUTABLE)
+
+# Build the executable
+$(EXECUTABLE): $(OBJFILE)
+	$(FC) $(LDFLAGS) -o $@ $<
+
+# Compile the object file
+$(OBJFILE): $(SRCFILE)
+	$(FC) $(FFLAGS) -c -o $@ $<
+
+# Clean up build files
+clean:
+	rm -f $(OBJFILE) $(EXECUTABLE) *.mod fort.*
+
+# Clean everything including output files
+distclean: clean
+	rm -f *.dat *.out *.plt
+
+# Run the program with input file
+run: $(EXECUTABLE)
+	./$(EXECUTABLE) < $(INPUT_FILE)
+
+# Debug build
+debug: FFLAGS = -O0 -g -Wall -Wextra -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow -fdefault-real-8 -fdefault-double-8
+debug: clean $(EXECUTABLE)
+
+# Optimized build
+release: FFLAGS = -O3 -march=native -funroll-loops -fdefault-real-8 -fdefault-double-8
+release: clean $(EXECUTABLE)
+
+# Install (copy to a bin directory)
+install: $(EXECUTABLE)
+	@mkdir -p $(HOME)/bin
+	cp $(EXECUTABLE) $(HOME)/bin/
+
+# Show compiler info
+info:
+	@echo "Compiler: $(FC)"
+	@echo "Flags: $(FFLAGS)"
+	@echo "Source: $(SRCFILE)"
+	@echo "Executable: $(EXECUTABLE)"
+	@$(FC) --version
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  all      - Build the executable (default)"
+	@echo "  clean    - Remove object files and executable"
+	@echo "  distclean- Remove all generated files"
+	@echo "  run      - Build and run the program with input file"
+	@echo "  debug    - Build with debug flags"
+	@echo "  release  - Build with optimization flags"
+	@echo "  install  - Install executable to ~/bin"
+	@echo "  info     - Show compiler information"
+	@echo "  help     - Show this help message"
+
+# Declare phony targets
+.PHONY: all clean distclean run debug release install info help

@@ -1,0 +1,66 @@
+# Git ignore file for LSSEM_F90 project
+
+# Compiled object files
+*.o
+*.obj
+*.mod
+
+# Executable files
+SEM_4files_v6
+sem_2d
+SEM_base_2D
+
+# Output data files
+*.dat
+*.out
+*.plt
+cavity_output.dat
+cavity_run_*.dat
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*~
+*.bak
+*.backup
+*.backup_*
+
+# Editor temporary files
+*.swp
+*.swo
+*#
+.#*
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Log files
+*.log
+
+# Restart files (but keep template)
+rstart.dat
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Build directories
+build/
+bin/
+obj/
+
+# Documentation build outputs
+docs/_build/
+docs/build/
+
+# Temporary compilation files
+*.tmp
+fort.*
+
+# Archive files
+*.tar.gz
+*.zip
+*.tar.bz2

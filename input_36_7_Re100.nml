@@ -3,14 +3,14 @@
   fout   = 'cavity_output_Re100.dat',
   re     = 100.,
   dt     = 0.1,
-  ntime  = 2000,
-  nsub   = 3,
-  iprt   = 1,
+  ntime  = 500,
+  nsub   = 1,
+  iprt   = 0,
   tol    = 1.0e-6,
   nitcgs = 1000,
   istart = 0,
   frun   = 'cavity_run_36_7_Re100.dat',
   iform  = 1,
   cgsfac = 1.e-3,
-  nsave  = 5
+  nsave  = 50000000
 /

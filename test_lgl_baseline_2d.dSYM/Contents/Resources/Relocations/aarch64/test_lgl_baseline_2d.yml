@@ -1,0 +1,24 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     test_lgl_baseline_2d
+relocations:
+  - { offset: 0x38, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_alp, symObjAddr: 0x3C0, symBinAddr: 0x10000C080, symSize: 0x0 }
+  - { offset: 0x52, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_bet, symObjAddr: 0x3B8, symBinAddr: 0x10000C078, symSize: 0x0 }
+  - { offset: 0x6C, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_rv, symObjAddr: 0x3B0, symBinAddr: 0x10000C070, symSize: 0x0 }
+  - { offset: 0xE4, size: 0x8, addend: 0x0, symName: _jacobf_, symObjAddr: 0x0, symBinAddr: 0x100004840, symSize: 0x140 }
+  - { offset: 0x104, size: 0x8, addend: 0x0, symName: _jacobf_, symObjAddr: 0x0, symBinAddr: 0x100004840, symSize: 0x140 }
+  - { offset: 0x289, size: 0x8, addend: 0x0, symName: _jacobl_, symObjAddr: 0x668, symBinAddr: 0x100004EA8, symSize: 0x418 }
+  - { offset: 0x5C0, size: 0x8, addend: 0x0, symName: _create_2d_grid_, symObjAddr: 0xDC0, symBinAddr: 0x100005600, symSize: 0x10C }
+  - { offset: 0x6C1, size: 0x8, addend: 0x0, symName: _create_2d_derivative_matrices_, symObjAddr: 0xA80, symBinAddr: 0x1000052C0, symSize: 0x340 }
+  - { offset: 0x846, size: 0x8, addend: 0x0, symName: _derv_, symObjAddr: 0x420, symBinAddr: 0x100004C60, symSize: 0x248 }
+  - { offset: 0x9AC, size: 0x8, addend: 0x0, symName: _quad_, symObjAddr: 0x300, symBinAddr: 0x100004B40, symSize: 0x120 }
+  - { offset: 0xAAA, size: 0x8, addend: 0x0, symName: _legen_, symObjAddr: 0x140, symBinAddr: 0x100004980, symSize: 0x1C0 }
+  - { offset: 0xBBE, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1840, symBinAddr: 0x100006920, symSize: 0x2C }
+  - { offset: 0xC07, size: 0x8, addend: 0x0, symName: _MAIN__, symObjAddr: 0x608, symBinAddr: 0x100005D28, symSize: 0xBDC }
+  - { offset: 0xC47, size: 0x8, addend: 0x0, symName: _dx_2d.1, symObjAddr: 0x226718, symBinAddr: 0x10022E990, symSize: 0x0 }
+  - { offset: 0xC5D, size: 0x8, addend: 0x0, symName: _dy_2d.0, symObjAddr: 0x3E10, symBinAddr: 0x10000C088, symSize: 0x0 }
+  - { offset: 0xEF7, size: 0x8, addend: 0x0, symName: _matrix_vector_multiply_, symObjAddr: 0x0, symBinAddr: 0x100005720, symSize: 0xE0 }
+  - { offset: 0xFE1, size: 0x8, addend: 0x0, symName: _convergence_analysis_, symObjAddr: 0xE0, symBinAddr: 0x100005800, symSize: 0x528 }
+  - { offset: 0x1031, size: 0x8, addend: 0x0, symName: _dx_2d.5, symObjAddr: 0x66B928, symBinAddr: 0x100673BA0, symSize: 0x0 }
+  - { offset: 0x1047, size: 0x8, addend: 0x0, symName: _dy_2d.4, symObjAddr: 0x449020, symBinAddr: 0x100451298, symSize: 0x0 }
+...

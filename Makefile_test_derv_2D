@@ -1,0 +1,39 @@
+# Makefile for test_derv_2D
+# Compiles and links the 2D derivative matrix test program
+
+FC = gfortran
+FFLAGS = -O2 -g -fdefault-real-8 -fdefault-double-8 -fbounds-check
+LIBS = 
+
+# Object files
+OBJS = sem_data.o lgl_baseline.o test_derv_2D.o
+
+# Target executable
+TARGET = test_derv_2D
+
+# Default target
+all: $(TARGET)
+
+# Link target
+$(TARGET): $(OBJS)
+	$(FC) $(FFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
+
+# Compile modules and source files
+sem_data.o: sem_data.f90
+	$(FC) $(FFLAGS) -c sem_data.f90
+
+lgl_baseline.o: lgl_baseline.f90 sem_data.o
+	$(FC) $(FFLAGS) -c lgl_baseline.f90
+
+test_derv_2D.o: test_derv_2D.f90 sem_data.o
+	$(FC) $(FFLAGS) -c test_derv_2D.f90
+
+# Clean up
+clean:
+	rm -f *.o *.mod $(TARGET)
+
+# Run the test
+run: $(TARGET)
+	./$(TARGET)
+
+.PHONY: all clean run

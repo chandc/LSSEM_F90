@@ -11,6 +11,9 @@
 module sem_data
   implicit none
   
+  ! Precision parameter
+  integer, parameter :: rprec = selected_real_kind(15, 307) ! Double precision
+  
   ! Field indices (replaces common /index/)
   ! These define the position of each variable in the solution vector
   integer, parameter :: iu = 1     ! U-velocity component index
@@ -20,8 +23,8 @@ module sem_data
   
   ! Jacobi polynomial parameters (replaces common /jacpar/)
   ! These are working variables used in spectral basis function computations
-  real(8) :: alp     ! Alpha parameter for Jacobi polynomials
-  real(8) :: bet     ! Beta parameter for Jacobi polynomials
-  real(8) :: rv      ! Working variable for polynomial evaluation
+  real(rprec) :: alp     ! Alpha parameter for Jacobi polynomials
+  real(rprec) :: bet     ! Beta parameter for Jacobi polynomials
+  real(rprec) :: rv      ! Working variable for polynomial evaluation
   
 end module sem_data

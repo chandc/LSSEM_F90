@@ -1,0 +1,83 @@
+# Makefile for Enhanced SEM Spectral Element Method 
+# Uses documented lssem_baseline.f90 with comprehensive docstrings
+
+# Compiler and flags
+FC = gfortran
+FFLAGS = -O2 -g -Wall -Wextra -fcheck=bounds -fbacktrace -fdefault-real-8 -fdefault-double-8 -ffree-form
+LDFLAGS = 
+
+# Alternative compiler options (uncomment as needed)
+# For Intel Fortran Compiler:
+# FC = ifort
+# FFLAGS = -O2 -g -warn all -check bounds -traceback -r8 -i8 -free
+
+# For debugging (uncomment for debug build):
+# FFLAGS = -O0 -g -Wall -Wextra -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow -fdefault-real-8 -fdefault-double-8 -ffree-form
+
+# Source files (in dependency order)
+SRC_FILES = sem_data_baseline.f90 SEM_08_baseline.f90 lssem_baseline.f90 solver_baseline.f90 lgl_baseline.f90
+OBJ_FILES = sem_data_baseline.o SEM_08_baseline.o lssem_baseline.o solver_baseline.o lgl_baseline.o
+EXECUTABLE = SEM_2D_Enhanced
+
+# Default target
+all: $(EXECUTABLE)
+
+# Create executable
+$(EXECUTABLE): $(OBJ_FILES)
+	@echo "Linking executable: $(EXECUTABLE)"
+	$(FC) $(FFLAGS) -o $(EXECUTABLE) $(OBJ_FILES) $(LDFLAGS)
+	@echo "Build successful: $(EXECUTABLE)"
+
+# Individual object file compilation
+sem_data_baseline.o: sem_data_baseline.f90
+	@echo "Compiling sem_data_baseline.f90..."
+	$(FC) $(FFLAGS) -c sem_data_baseline.f90
+
+SEM_08_baseline.o: SEM_08_baseline.f90 sem_data_baseline.o
+	@echo "Compiling SEM_08_baseline.f90..."
+	$(FC) $(FFLAGS) -c SEM_08_baseline.f90
+
+lssem_baseline.o: lssem_baseline.f90 sem_data_baseline.o
+	@echo "Compiling lssem_baseline.f90..."
+	$(FC) $(FFLAGS) -c lssem_baseline.f90
+
+solver_baseline.o: solver_baseline.f90 sem_data_baseline.o
+	@echo "Compiling solver_baseline.f90..."
+	$(FC) $(FFLAGS) -c solver_baseline.f90
+
+lgl_baseline.o: lgl_baseline.f90 sem_data_baseline.o
+	@echo "Compiling lgl_baseline.f90..."
+	$(FC) $(FFLAGS) -c lgl_baseline.f90
+
+# Clean targets
+clean:
+	@echo "Cleaning object files..."
+	rm -f *.o *.mod
+
+clean-all: clean
+	@echo "Cleaning executable and output files..."
+	rm -f $(EXECUTABLE) *.dat *.out
+
+# Force rebuild
+rebuild: clean-all all
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  all        - Build the executable (default)"
+	@echo "  clean      - Remove object files and modules"
+	@echo "  clean-all  - Remove all generated files"
+	@echo "  rebuild    - Clean and rebuild everything"
+	@echo "  help       - Show this help message"
+
+# Test targets
+test-cavity: $(EXECUTABLE)
+	@echo "Running cavity flow test case..."
+	./$(EXECUTABLE) < input_36_7_Re100.nml > cavity_enhanced_Re100.out
+
+test-high-re: $(EXECUTABLE)
+	@echo "Running high Reynolds number test case..."
+	./$(EXECUTABLE) < input_36_7_Re1000.nml > cavity_enhanced_Re1000.out
+
+# Phony targets
+.PHONY: all clean clean-all rebuild help test-cavity test-high-re

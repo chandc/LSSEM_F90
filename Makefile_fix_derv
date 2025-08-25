@@ -1,0 +1,101 @@
+# Makefile for SEM Spectral Element Method (With Corrected Derv Implementation)
+# All files now use free-form Fortran 90 syntax
+# This version uses lgl_fix_derv.f90 with mathematical corrections to differentiation matrix
+
+# Compiler and flags
+FC = gfortran
+FFLAGS = -O2 -g -Wall -Wextra -fcheck=bounds -fbacktrace -fdefault-real-8 -fdefault-double-8 -ffree-form
+LDFLAGS = 
+
+# Alternative compiler options (uncomment as needed)
+# For Intel Fortran Compiler:
+# FC = ifort
+# FFLAGS = -O2 -g -warn all -check bounds -traceback -r8 -i8 -free
+
+# For debugging (uncomment for debug build):
+# FFLAGS = -O0 -g -Wall -Wextra -fcheck=all -fbacktrace -ffpe-trap=invalid,zero,overflow -fdefault-real-8 -fdefault-double-8 -ffree-form
+
+# Source files (in dependency order) - Using corrected derv implementation
+SRC_FILES = sem_data_baseline.f90 SEM_08_baseline.f90 lssem_baseline.f90 solver_baseline.f90 lgl_fix_derv.f90
+OBJ_FILES = sem_data_baseline.o SEM_08_baseline.o lssem_baseline.o solver_baseline.o lgl_fix_derv.o
+EXECUTABLE = SEM_2D_fix_derv
+
+# Input files
+INPUT_FILE_RE100 = input_36_7_Re100.nml
+INPUT_FILE_RE1000 = input_36_7_Re1000.nml
+INPUT_FILE_DEFAULT = input.nml
+
+# Default target
+all: $(EXECUTABLE)
+
+# Build the executable
+$(EXECUTABLE): $(OBJ_FILES)
+	$(FC) $(LDFLAGS) -o $@ $^
+
+# Compile object files (all use free-form F90)
+%.o: %.f90
+	$(FC) $(FFLAGS) -c -o $@ $<
+
+# Module dependencies
+SEM_08_baseline.o: sem_data_baseline.o
+lssem_baseline.o: sem_data_baseline.o
+solver_baseline.o: sem_data_baseline.o
+
+# Phony targets
+.PHONY: all clean distclean run run-re100 run-re1000 help
+
+# Clean up build files
+clean:
+	rm -f $(OBJ_FILES) *.mod
+
+# Clean everything including executable and output files
+distclean: clean
+	rm -f $(EXECUTABLE) *.dat *.out *.plt
+
+# Run the program with different Reynolds numbers
+run: $(EXECUTABLE)
+	./$(EXECUTABLE) < $(INPUT_FILE_DEFAULT)
+
+run-re100: $(EXECUTABLE)
+	./$(EXECUTABLE) < $(INPUT_FILE_RE100)
+
+run-re1000: $(EXECUTABLE)
+	./$(EXECUTABLE) < $(INPUT_FILE_RE1000)
+
+# Help target
+help:
+	@echo "Available targets:"
+	@echo "  all         - Build the executable (default)"
+	@echo "  clean       - Remove object files and modules"
+	@echo "  distclean   - Remove all generated files"
+	@echo "  run         - Run with default input file"
+	@echo "  run-re100   - Run with Re=100 cavity case"
+	@echo "  run-re1000  - Run with Re=1000 cavity case"
+	@echo "  help        - Show this help message"
+	@echo ""
+	@echo "Compiler: $(FC)"
+	@echo "Executable: $(EXECUTABLE)"
+	@echo "Source files: $(SRC_FILES)"
+
+# Show current status
+status:
+	@echo "SEM Spectral Element Method - With Corrected Derv Implementation"
+	@echo "================================================================"
+	@echo "Compiler: $(FC)"
+	@echo "Flags: $(FFLAGS)"
+	@echo "Executable: $(EXECUTABLE)"
+	@echo "Source files: $(SRC_FILES)"
+	@echo ""
+	@if [ -f $(EXECUTABLE) ]; then \
+		echo "✅ Executable exists ($(shell ls -lh $(EXECUTABLE) | awk '{print $$5}'))"; \
+	else \
+		echo "❌ Executable not found"; \
+	fi
+	@echo "Object files:"
+	@for obj in $(OBJ_FILES); do \
+		if [ -f $$obj ]; then \
+			echo "  ✅ $$obj"; \
+		else \
+			echo "  ❌ $$obj"; \
+		fi; \
+	done

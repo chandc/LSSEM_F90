@@ -1,0 +1,27 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     compare_even_odd_orders
+relocations:
+  - { offset: 0x38, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_alp, symObjAddr: 0x3C0, symBinAddr: 0x10000C068, symSize: 0x0 }
+  - { offset: 0x52, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_bet, symObjAddr: 0x3B8, symBinAddr: 0x10000C060, symSize: 0x0 }
+  - { offset: 0x6C, size: 0x8, addend: 0x0, symName: ___sem_data_MOD_rv, symObjAddr: 0x3B0, symBinAddr: 0x10000C058, symSize: 0x0 }
+  - { offset: 0xE4, size: 0x8, addend: 0x0, symName: _jacobf_, symObjAddr: 0x0, symBinAddr: 0x100004B20, symSize: 0x140 }
+  - { offset: 0x104, size: 0x8, addend: 0x0, symName: _jacobf_, symObjAddr: 0x0, symBinAddr: 0x100004B20, symSize: 0x140 }
+  - { offset: 0x289, size: 0x8, addend: 0x0, symName: _jacobl_, symObjAddr: 0x668, symBinAddr: 0x100005188, symSize: 0x410 }
+  - { offset: 0x5DC, size: 0x8, addend: 0x0, symName: _derv_, symObjAddr: 0x420, symBinAddr: 0x100004F40, symSize: 0x248 }
+  - { offset: 0x742, size: 0x8, addend: 0x0, symName: _quad_, symObjAddr: 0x300, symBinAddr: 0x100004E20, symSize: 0x120 }
+  - { offset: 0x840, size: 0x8, addend: 0x0, symName: _legen_, symObjAddr: 0x140, symBinAddr: 0x100004C60, symSize: 0x1C0 }
+  - { offset: 0x954, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x1C60, symBinAddr: 0x100006980, symSize: 0x2C }
+  - { offset: 0x99D, size: 0x8, addend: 0x0, symName: _MAIN__, symObjAddr: 0xB24, symBinAddr: 0x1000060C4, symSize: 0x82C }
+  - { offset: 0x9CD, size: 0x8, addend: 0x0, symName: _dx_2d.1, symObjAddr: 0x228890, symBinAddr: 0x10022E978, symSize: 0x0 }
+  - { offset: 0x9E3, size: 0x8, addend: 0x0, symName: _dy_2d.0, symObjAddr: 0x5F88, symBinAddr: 0x10000C070, symSize: 0x0 }
+  - { offset: 0xD59, size: 0x8, addend: 0x0, symName: _create_2d_grid_, symObjAddr: 0x5C0, symBinAddr: 0x100005B60, symSize: 0x10C }
+  - { offset: 0xE51, size: 0x8, addend: 0x0, symName: _create_2d_derivative_matrices_, symObjAddr: 0x280, symBinAddr: 0x100005820, symSize: 0x340 }
+  - { offset: 0xFB3, size: 0x8, addend: 0x0, symName: _test_function_sincos_, symObjAddr: 0x188, symBinAddr: 0x100005728, symSize: 0xF8 }
+  - { offset: 0x10DF, size: 0x8, addend: 0x0, symName: _apply_derivative_matrix_, symObjAddr: 0xAC, symBinAddr: 0x10000564C, symSize: 0xDC }
+  - { offset: 0x11C9, size: 0x8, addend: 0x0, symName: _compute_errors_, symObjAddr: 0x0, symBinAddr: 0x1000055A0, symSize: 0xAC }
+  - { offset: 0x12EA, size: 0x8, addend: 0x0, symName: _compare_adjacent_orders_, symObjAddr: 0x6CC, symBinAddr: 0x100005C6C, symSize: 0x458 }
+  - { offset: 0x134D, size: 0x8, addend: 0x0, symName: _dx_2d.4, symObjAddr: 0x66DAA0, symBinAddr: 0x100673B88, symSize: 0x0 }
+  - { offset: 0x1363, size: 0x8, addend: 0x0, symName: _dy_2d.3, symObjAddr: 0x44B198, symBinAddr: 0x100451280, symSize: 0x0 }
+  - { offset: 0x16EB, size: 0x8, addend: 0x0, symName: _setup_1d_grid_, symObjAddr: 0x1350, symBinAddr: 0x1000068F0, symSize: 0x74 }
+...

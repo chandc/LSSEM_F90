@@ -1,0 +1,15 @@
+&input
+  fin    = 'cavity_36_7_elem_grid.dat',
+  fout   = 'cavity_output.dat',
+  re     = 1000.,
+  dt     = 0.1,
+  ntime  = 1,
+  nsub   = 3,
+  iprt   = 0,
+  tol    = 1.0e-6,
+  nitcgs = 10,
+  istart = 0,
+  frun   = 'cavity_run_36_7_Re1000.dat',
+  iform  = 1,
+  cgsfac = 1.e-3
+/

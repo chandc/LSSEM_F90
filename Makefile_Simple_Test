@@ -1,0 +1,15 @@
+# Simple OpenMP test Makefile
+FC = gfortran
+FFLAGS = -O3 -fopenmp -fdefault-real-8 -fdefault-double-8
+LDFLAGS = -fopenmp -framework Accelerate
+
+# Simple test executable
+sem_simple_omp: sem_data_work.o lssem_simple_omp.o solver_work.o lgl_work.o SEM_08_work.o
+	$(FC) $(FFLAGS) -o SEM_Simple_OMP sem_data_work.o lssem_simple_omp.o solver_work.o lgl_work.o SEM_08_work.o $(LDFLAGS)
+
+# Object files
+%.o: %.f90
+	$(FC) $(FFLAGS) -c $<
+
+clean:
+	rm -f *.o *.mod SEM_Simple_OMP
